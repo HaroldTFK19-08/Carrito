@@ -1,0 +1,173 @@
+/* Variables globales para mantener la consistencia de colores y estilos */
+:root {
+  --font-family:
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif;
+  --color-primary: #15803d;
+  --color-primary-hover: #166534;
+  --color-bg-total: #f0fdf4;
+  --color-text-main: #1f2937;
+  --color-text-muted: #6b7280;
+  --color-border: #e5e7eb;
+  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Panel principal del carrito */
+.panel {
+  width: 100%;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 32px;
+  background-color: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  box-shadow:
+    0 10px 30px -5px rgba(0, 0, 0, 0.05),
+    0 1px 3px 0 rgba(0, 0, 0, 0.02);
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+/* Título */
+.panel h2 {
+  margin: 0 0 24px;
+  color: var(--color-text-main);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+}
+
+/* Fila de cada producto */
+.fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 20px 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+/* Información del producto */
+.fila-nombre {
+  margin: 0 0 6px;
+  color: #111827;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.fila-detalle {
+  margin: 0;
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+/* Botones base */
+.btn {
+  padding: 10px 18px;
+  border: none;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition-smooth);
+  user-select: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Botón secundario */
+.btn-secundario {
+  color: var(--color-primary-hover);
+  background-color: #dcfce7;
+}
+
+.btn-secundario:hover {
+  background-color: #bbf7d0;
+}
+
+/* Total */
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 28px;
+  padding: 24px;
+  background-color: var(--color-bg-total);
+  border-radius: 14px;
+  border: 1px solid #d1fae5;
+}
+
+.total span {
+  color: #374151;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.total strong {
+  color: var(--color-primary);
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Botón para vaciar todo el carrito */
+.btn-bloque {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+}
+
+/* Mensaje de carrito vacío */
+.vacio {
+  margin: 0;
+  padding: 40px 20px;
+  color: var(--color-text-muted);
+  background-color: #f9fafb;
+  border: 2px dashed #e5e7eb;
+  border-radius: 14px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: 500;
+}
+
+/* Adaptación a celulares */
+@media (max-width: 480px) {
+  .panel {
+    margin: 16px;
+    padding: 20px;
+    border-radius: 16px;
+    width: auto;
+  }
+
+  .panel h2 {
+    font-size: 20px;
+  }
+
+  .fila {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  /* Asegura que los botones ocupen buen ancho en móvil si es necesario */
+  .fila .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .total {
+    padding: 18px;
+  }
+
+  .total strong {
+    font-size: 20px;
+  }
+}

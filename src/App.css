@@ -1,0 +1,212 @@
+/* Reinicio básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  background: #f3f6f4;
+  color: #1f2937;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Contenedor general de la aplicación */
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Contenido principal: catálogo y carrito */
+.contenido {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(300px, 1fr);
+  align-items: start;
+  gap: 28px;
+
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 24px;
+}
+
+/* Tarjetas del catálogo y del carrito */
+.contenido .panel {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 26px;
+
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 16px;
+
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.04);
+}
+
+/* Títulos de las secciones */
+.contenido .panel h2 {
+  margin: 0 0 8px;
+  padding-bottom: 18px;
+
+  color: #166534;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+/* Filas de productos y carrito */
+.contenido .fila {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+
+  padding: 18px 0;
+  border-bottom: 1px solid #edf0ed;
+}
+
+.contenido .fila:last-child {
+  border-bottom: none;
+}
+
+/* Nombre de cada producto */
+.fila-nombre {
+  color: #1f2937;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* Precio y detalles */
+.fila-detalle {
+  margin-top: 6px;
+  color: #6b7280;
+  font-size: 14px;
+}
+
+/* Botones */
+.btn {
+  flex-shrink: 0;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primario {
+  padding: 11px 16px;
+  background: #15803d;
+  color: #ffffff;
+}
+
+.btn-primario:hover {
+  background: #166534;
+}
+
+.btn-secundario {
+  padding: 10px 14px;
+  background: #dcfce7;
+  color: #166534;
+}
+
+.btn-secundario:hover {
+  background: #bbf7d0;
+}
+
+.btn-bloque {
+  width: 100%;
+  margin-top: 20px;
+  padding: 13px;
+}
+
+/* Total del carrito */
+.total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin-top: 20px;
+  padding: 18px;
+
+  background: #f0fdf4;
+  border-radius: 10px;
+}
+
+.total span {
+  color: #374151;
+  font-weight: 500;
+}
+
+.total strong {
+  color: #15803d;
+  font-size: 22px;
+}
+
+/* Carrito vacío */
+.vacio {
+  padding: 28px 12px;
+  background: #f9fafb;
+  border: 1px dashed #d1d5db;
+  border-radius: 10px;
+  color: #6b7280;
+  text-align: center;
+}
+
+/* Tabletas */
+@media (max-width: 850px) {
+  .contenido {
+    grid-template-columns: 1fr;
+    max-width: 650px;
+    gap: 20px;
+    padding: 24px 20px;
+  }
+}
+
+/* Celulares */
+@media (max-width: 480px) {
+  .contenido {
+    gap: 16px;
+    padding: 16px 12px;
+  }
+
+  .contenido .panel {
+    padding: 18px;
+    border-radius: 12px;
+  }
+
+  .contenido .panel h2 {
+    font-size: 20px;
+  }
+
+  .contenido .fila {
+    gap: 10px;
+  }
+
+  .fila-nombre {
+    font-size: 14px;
+  }
+
+  .btn-primario,
+  .btn-secundario {
+    padding: 9px 11px;
+    font-size: 12px;
+  }
+
+  .total {
+    padding: 14px;
+  }
+
+  .total strong {
+    font-size: 19px;
+  }
+}
