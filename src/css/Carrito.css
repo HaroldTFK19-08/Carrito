@@ -1,173 +1,381 @@
-/* Variables globales para mantener la consistencia de colores y estilos */
+/* =========================================
+   1. VARIABLES GLOBALES
+========================================= */
+
 :root {
   --font-family:
-    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
     Arial, sans-serif;
+
   --color-primary: #15803d;
   --color-primary-hover: #166534;
-  --color-bg-total: #f0fdf4;
-  --color-text-main: #1f2937;
+  --color-primary-light: #f0fdf4;
+
+  --color-text-main: #111827;
+  --color-text-secondary: #4b5563;
   --color-text-muted: #6b7280;
+
+  --color-bg: #f8fafc;
+  --color-white: #ffffff;
   --color-border: #e5e7eb;
-  --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  --color-border-hover: #d1d5db;
+
+  --color-danger: #dc2626;
+  --color-danger-bg: #fef2f2;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+
+  --shadow-sm: 0 2px 6px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 8px 24px rgba(15, 23, 42, 0.07);
+  --shadow-focus: 0 0 0 4px rgba(21, 128, 61, 0.15);
+
+  --transition: 180ms ease;
 }
 
-/* Panel principal del carrito */
+/* =========================================
+   2. CONFIGURACIÓN GENERAL
+========================================= */
+
+* {
+  box-sizing: border-box;
+}
+
 .panel {
-  width: 100%;
-  max-width: 600px;
+  width: min(100% - 32px, 680px);
   margin: 40px auto;
   padding: 32px;
-  background-color: #ffffff;
+  background: var(--color-white);
   border: 1px solid var(--color-border);
-  border-radius: 20px;
-  box-shadow:
-    0 10px 30px -5px rgba(0, 0, 0, 0.05),
-    0 1px 3px 0 rgba(0, 0, 0, 0.02);
-  box-sizing: border-box;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
   font-family: var(--font-family);
+  color: var(--color-text-main);
 }
 
-/* Título */
+/* =========================================
+   3. TÍTULOS
+========================================= */
+
 .panel h2 {
   margin: 0 0 24px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--color-border);
   color: var(--color-text-main);
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.025em;
+  font-size: 25px;
+  font-weight: 750;
+  line-height: 1.3;
+  letter-spacing: -0.8px;
 }
 
-/* Fila de cada producto */
+/* =========================================
+   4. FILAS DE PRODUCTOS
+========================================= */
+
 .fila {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
-  padding: 20px 0;
+  gap: 20px;
+  padding: 22px 0;
   border-bottom: 1px solid var(--color-border);
+  transition: background var(--transition);
 }
 
-/* Información del producto */
+.fila:last-of-type {
+  border-bottom-color: var(--color-border);
+}
+
+.fila > div:first-child {
+  flex: 1;
+  min-width: 0;
+}
+
 .fila-nombre {
-  margin: 0 0 6px;
-  color: #111827;
+  margin: 0 0 8px;
+  color: var(--color-text-main);
   font-size: 15px;
-  font-weight: 600;
+  font-weight: 650;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
 .fila-detalle {
-  margin: 0;
+  margin: 5px 0 0;
   color: var(--color-text-muted);
-  font-size: 14px;
+  font-size: 13px;
+  line-height: 1.6;
 }
 
-/* Botones base */
+/* =========================================
+   5. BOTONES
+========================================= */
+
 .btn {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 10px;
-  font-size: 14px;
-  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 10px 16px;
+
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.2;
+  white-space: nowrap;
+
   cursor: pointer;
-  transition: var(--transition-smooth);
   user-select: none;
+
+  transition:
+    background var(--transition),
+    color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition),
+    transform var(--transition);
 }
 
 .btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  transform: translateY(-1px);
 }
 
 .btn:active {
   transform: translateY(0);
 }
 
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* Botón principal */
+
+.btn-primario {
+  color: var(--color-white);
+  background: var(--color-primary);
+  box-shadow: 0 2px 4px rgba(21, 128, 61, 0.12);
+}
+
+.btn-primario:hover {
+  background: var(--color-primary-hover);
+  box-shadow: 0 4px 10px rgba(21, 128, 61, 0.18);
+}
+
 /* Botón secundario */
+
 .btn-secundario {
-  color: var(--color-primary-hover);
-  background-color: #dcfce7;
+  color: var(--color-text-secondary);
+  background: var(--color-white);
+  border-color: var(--color-border);
 }
 
 .btn-secundario:hover {
-  background-color: #bbf7d0;
+  color: var(--color-primary-hover);
+  background: var(--color-primary-light);
+  border-color: #bbf7d0;
 }
 
-/* Total */
+/* Botón de ancho completo */
+
+.btn-bloque {
+  width: 100%;
+  min-height: 48px;
+  margin-top: 20px;
+}
+
+/* =========================================
+   6. CONTROLES DE CANTIDAD
+========================================= */
+
+/* Compatible con los botones + y − del carrito */
+
+.fila .btn-secundario {
+  min-width: 40px;
+}
+
+/* =========================================
+   7. RESUMEN DEL TOTAL
+========================================= */
+
 .total {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 12px;
+  gap: 16px;
+
   margin-top: 28px;
-  padding: 24px;
-  background-color: var(--color-bg-total);
-  border-radius: 14px;
-  border: 1px solid #d1fae5;
+  padding: 22px;
+
+  background: var(--color-primary-light);
+  border: 1px solid #dcfce7;
+  border-radius: var(--radius-md);
 }
 
 .total span {
-  color: #374151;
-  font-size: 16px;
-  font-weight: 500;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .total strong {
-  color: var(--color-primary);
-  font-size: 24px;
-  font-weight: 700;
-  letter-spacing: -0.02em;
+  color: var(--color-primary-hover);
+  font-size: 25px;
+  font-weight: 750;
+  line-height: 1.3;
+  letter-spacing: -0.7px;
+  overflow-wrap: anywhere;
 }
 
-/* Botón para vaciar todo el carrito */
-.btn-bloque {
-  width: 100%;
-  margin-top: 24px;
-  padding: 14px;
-}
+/* =========================================
+   8. CARRITO VACÍO
+========================================= */
 
-/* Mensaje de carrito vacío */
 .vacio {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 150px;
   margin: 0;
-  padding: 40px 20px;
+  padding: 28px;
+
   color: var(--color-text-muted);
-  background-color: #f9fafb;
-  border: 2px dashed #e5e7eb;
-  border-radius: 14px;
+  background: var(--color-bg);
+  border: 1px dashed var(--color-border-hover);
+  border-radius: var(--radius-md);
+
   text-align: center;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.7;
 }
 
-/* Adaptación a celulares */
-@media (max-width: 480px) {
+/* =========================================
+   9. RESPONSIVE: TABLETS
+========================================= */
+
+@media (max-width: 768px) {
   .panel {
-    margin: 16px;
-    padding: 20px;
-    border-radius: 16px;
-    width: auto;
+    margin-top: 28px;
+    padding: 26px;
   }
 
   .panel h2 {
-    font-size: 20px;
-  }
-
-  .fila {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 12px;
-  }
-
-  /* Asegura que los botones ocupen buen ancho en móvil si es necesario */
-  .fila .btn {
-    width: 100%;
-    text-align: center;
+    font-size: 23px;
   }
 
   .total {
-    padding: 18px;
+    padding: 20px;
+  }
+}
+
+/* =========================================
+   10. RESPONSIVE: CELULARES
+========================================= */
+
+@media (max-width: 480px) {
+  .panel {
+    width: calc(100% - 24px);
+    margin: 12px auto;
+    padding: 20px 16px;
+    border-radius: var(--radius-md);
+  }
+
+  .panel h2 {
+    margin-bottom: 12px;
+    padding-bottom: 15px;
+    font-size: 21px;
+  }
+
+  .fila {
+    align-items: stretch;
+    gap: 14px;
+    padding: 18px 0;
+  }
+
+  .fila-nombre {
+    font-size: 14px;
+  }
+
+  .fila-detalle {
+    font-size: 12px;
+  }
+
+  .fila .btn {
+    min-height: 42px;
+    padding: 10px 12px;
+  }
+
+  /* El botón Quitar ocupa el ancho disponible en móvil */
+  .fila > .btn {
+    align-self: flex-start;
+    width: 100%;
+  }
+
+  .total {
+    gap: 10px;
+    margin-top: 22px;
+    padding: 18px 14px;
+  }
+
+  .total span {
+    font-size: 13px;
   }
 
   .total strong {
-    font-size: 20px;
+    font-size: 21px;
   }
+
+  .btn-bloque {
+    min-height: 46px;
+    margin-top: 16px;
+  }
+}
+
+/* =========================================
+   11. ACCESIBILIDAD
+========================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+.controles-cantidad {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.controles-cantidad span {
+  min-width: 20px;
+  color: var(--color-text-main);
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+}
+
+.controles-cantidad .btn {
+  width: 38px;
+  min-width: 38px;
+  min-height: 38px;
+  padding: 0;
+  font-size: 18px;
 }

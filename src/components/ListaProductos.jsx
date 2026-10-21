@@ -1,27 +1,60 @@
+import { useEffect, useState } from "react";
 import { useCarritoStore } from "../store/useCarrito";
-import productos from "../data/productos";
+import { obtenerProductos } from "../services/productos";
+
 // Definimos el componente ListaProductos
 function ListaProductos() {
-  // Del store solo necesitamos la acción para agregar
   const agregarProducto = useCarritoStore((state) => state.agregarProducto);
+
+  const [productos, setProductos] = useState([]);
+  const [cargando, setCargando] = useState(true);
+  const [error, setError] = useState("");
+
+  // Consultamos los productos al cargar el componente
+  useEffect(() => {
+    obtenerProductos()
+      .then((datos) => {
+        setProductos(datos);
+      })
+      .catch(() => {
+        setError("No se pudieron cargar los productos.");
+      })
+      .finally(() => {
+        setCargando(false);
+      });
+  }, []);
+
+  if (cargando) {
+    return (
+      <section className="panel">
+        <h2>Productos</h2>
+        <p>Cargando productos...</p>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="panel">
+        <p>{error}</p>
+      </section>
+    );
+  }
+
   return (
-    // section agrupa todo el catálogo; panel le da apariencia de tarjeta
     <section className="panel">
       <h2>Productos</h2>
-      {/* Recorremos los productos y creamos una fila por cada uno */}
+
       {productos.map((producto) => (
-        // key ayuda a React a identificar cada elemento de la lista
         <div key={producto.id} className="fila">
-          {/* Bloque con el nombre y el precio */}
           <div>
             <p className="fila-nombre">{producto.nombre}</p>
-            {/* toLocaleString('es-CO') da formato de pesos: 45.000 */}
 
             <p className="fila-detalle">
               ${producto.precio.toLocaleString("es-CO")}
             </p>
           </div>
-          {/* Al hacer clic, enviamos el producto completo a la acción del store */}
+
           <button
             className="btn btn-primario"
             onClick={() => agregarProducto(producto)}
@@ -33,5 +66,5 @@ function ListaProductos() {
     </section>
   );
 }
-// Exportamos el componente
+
 export default ListaProductos;

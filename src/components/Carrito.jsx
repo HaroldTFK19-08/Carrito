@@ -1,18 +1,20 @@
 import { useCarritoStore } from "../store/useCarrito";
-import "../css/Carrito.css"
+import "../css/Carrito.css";
+
 function Carrito() {
-  // Obtenemos los datos y las acciones del store de Zustand
   const items = useCarritoStore((state) => state.items);
   const eliminarProducto = useCarritoStore((state) => state.eliminarProducto);
   const vaciarCarrito = useCarritoStore((state) => state.vaciarCarrito);
+  const agregarProducto = useCarritoStore((state) => state.agregarProducto);
+  const disminuirCantidad = useCarritoStore((state) => state.disminuirCantidad);
 
-  // Calculamos el total de los productos del carrito
+  // Calcular el total general
   const total = items.reduce(
     (suma, item) => suma + item.precio * item.cantidad,
-    0, // Valor inicial para evitar errores si el carrito está vacío
+    0,
   );
 
-  // Si el carrito está vacío, mostramos un mensaje
+  // Mostrar mensaje si el carrito está vacío
   if (items.length === 0) {
     return (
       <section className="panel">
@@ -22,26 +24,49 @@ function Carrito() {
     );
   }
 
-  // Si hay productos, mostramos la lista y el total
   return (
     <section className="panel">
       <h2>Carrito</h2>
 
-      {/* Mostramos cada producto */}
       {items.map((item) => (
         <div key={item.id} className="fila">
-          <div>
+          <div className="producto-info">
             <p className="fila-nombre">{item.nombre}</p>
 
-            {/* Cantidad y precio unitario */}
             <p className="fila-detalle">
-              {item.cantidad} x ${item.precio.toLocaleString("es-CO")}
+              Precio unitario: ${item.precio.toLocaleString("es-CO")}
             </p>
+
+            <p className="fila-detalle">
+              Subtotal: ${(item.precio * item.cantidad).toLocaleString("es-CO")}
+            </p>
+
+            <div className="controles-cantidad">
+              <button
+                type="button"
+                className="btn btn-secundario"
+                onClick={() => disminuirCantidad(item.id)}
+                aria-label={`Disminuir cantidad de ${item.nombre}`}
+              >
+                −
+              </button>
+
+              <span>{item.cantidad}</span>
+
+              <button
+                type="button"
+                className="btn btn-primario"
+                onClick={() => agregarProducto(item)}
+                aria-label={`Aumentar cantidad de ${item.nombre}`}
+              >
+                +
+              </button>
+            </div>
           </div>
 
-          {/* Botón para quitar un producto */}
           <button
-            className="btn btn-secundario"
+            type="button"
+            className="btn btn-secundario btn-quitar"
             onClick={() => eliminarProducto(item.id)}
           >
             Quitar
@@ -49,14 +74,16 @@ function Carrito() {
         </div>
       ))}
 
-      {/* Total del carrito */}
       <div className="total">
-        <span>Total</span>
+        <span>Total del carrito</span>
         <strong>${total.toLocaleString("es-CO")}</strong>
       </div>
 
-      {/* Botón para vaciar el carrito */}
-      <button className="btn btn-secundario btn-bloque" onClick={vaciarCarrito}>
+      <button
+        type="button"
+        className="btn btn-secundario btn-bloque"
+        onClick={vaciarCarrito}
+      >
         Vaciar carrito
       </button>
     </section>
