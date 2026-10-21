@@ -11,3 +11,5 @@ Porque React y Zustand trabajan mejor cuando el estado se actualiza de forma inm
 No, Zustand no forma parte de React. Es una librería externa del ecosistema de React que se puede instalar para administrar el estado global.
 
 React incluye herramientas propias como useState y useEffect, mientras que Zustand ofrece funcionalidades adicionales para compartir y gestionar el estado entre diferentes componentes sin tener que pasar tantas props.
+
+![alt text](image.png)
